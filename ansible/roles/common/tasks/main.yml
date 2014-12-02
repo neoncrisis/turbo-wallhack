@@ -1,0 +1,12 @@
+---
+- name: Update the package list
+  apt: update_cache=yes
+
+- name: Configure for automatic security updates
+  copy: src=apt-auto-upgrades dest=/etc/apt/apt.conf.d/20auto-upgrades
+
+- name: Install automatic security updates
+  command: /usr/bin/unattended-upgrade
+
+- name: Install htop
+  apt: pkg=htop

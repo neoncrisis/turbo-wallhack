@@ -1,0 +1,25 @@
+---
+- name: Install PostgreSQL adapter for python
+  apt: pkg=python-psycopg2
+
+- name: Install postgresql
+  sudo: yes
+  action: apt pkg={{ item }}
+  with_items:
+    - postgresql
+    - postgresql-contrib
+
+- name: Setup postgres db
+  sudo: yes
+  sudo_user: postgres
+  postgresql_db: name={{ db_name }}
+
+- name: Setup postgres user
+  sudo: yes
+  sudo_user: postgres
+  postgresql_user: db={{ db_name}} user={{ db_name }} password={{ db_password }} role_attr_flags=CREATEDB
+
+- name: Setup postgres to listen on other interfaces
+  lineinfile: dest=/etc/postgresql/9.3/main/postgresql.conf line="listen_addresses='*'"
+  notify:
+    - restart postgres
