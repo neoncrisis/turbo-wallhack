@@ -1,0 +1,14 @@
+username: www-data
+groupname: www-data
+project_name: electric_boogaloo
+
+user_home: /home/{{ username }}
+code_dir: /code
+python_path: "{{ user_home }}/Envs/{{ project_name }}"
+project_path: "{{ code_dir }}/{{ project_name }}"
+#django_path: "{{ project_path }}/{{ project_name }}"
+
+env_vars:
+  DJANGO_SETTINGS_MODULE: "{{ django_settings_module }}"
+  SECRET_KEY: "{{ django_secret_key }}"
+  PATH: "{{ python_path }}/bin:{{ www_home }}/node_modules/.bin:{{ ansible_env.PATH }}"
