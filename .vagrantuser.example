@@ -1,0 +1,12 @@
+# NOTE: Look at the value of config.user.defaults in Vagrantfile for a full list of configuration options
+digital_ocean:
+    # The API token is used to create a droplet, and thus will require write permissions
+    api_token: <DIGITAL_OCEAN_API_TOKEN>
+
+ansible:
+    # Pick a sufficiently strong password for the database
+    db_password: <DB_PASSWORD>
+
+vagrant:
+    # Set the path to the code repository (on your host).  Paths are relative to the this directory.
+    code_dir: <LOCAL_CODE_DIR>

@@ -1,0 +1,4 @@
+username: vagrant
+groupname: vagrant
+django_settings_module: "{{ project_name }}.settings.local"
+requirements_path: "{{ project_path }}/requirements.txt"
