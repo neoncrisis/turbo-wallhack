@@ -56,7 +56,8 @@ Technically, this repository should work on Windows and Mac but the instructions
 
     ```sh
     $ vagrant ssh
-    $ django-admin runserver 0.0.0.0:8080
+    $ cd /code/electric_boogaloo
+    $ DJANGO_SETTINGS_MODULE=electric_boogaloo.settings.loc python manage.py runserver 0.0.0.0:8080
     ```
 
 ## Run on Digital Ocean
@@ -78,7 +79,8 @@ Technically, this repository should work on Windows and Mac but the instructions
 
     ```sh
     $ vagrant ssh
-    $ django-admin runserver 0.0.0.0:8080
+    $ cd /code/electric_boogaloo
+    $ DJANGO_SETTINGS_MODULE=electric_boogaloo.settings.loc python manage.py runserver 0.0.0.0:8080
     ```
 
 ## Tips and Tricks
