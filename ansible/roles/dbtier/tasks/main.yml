@@ -1,23 +1,21 @@
 ---
-- name: Install PostgreSQL adapter for python
-  apt: pkg=python-psycopg2
+- name: set locale to {{locale}}
+  command: /usr/sbin/update-locale LANG={{locale}} LC_ALL={{locale}}
 
-- name: Install postgresql
-  sudo: yes
-  action: apt pkg={{ item }}
+- name: ensure postres is installed
+  apt: name={{item}} state=installed update-cache=yes
   with_items:
     - postgresql
     - postgresql-contrib
+    - python-psycopg2
 
-- name: Setup postgres db
-  sudo: yes
+- name: create database
   sudo_user: postgres
-  postgresql_db: name={{ db_name }}
+  postgresql_db: name={{db_name}} owner={{db_user}} lc_ctype={{locale}} lc_collate={{locale}}
 
-- name: Setup postgres user
-  sudo: yes
+- name: create the postgre user
   sudo_user: postgres
-  postgresql_user: db={{ db_name}} user={{ db_name }} password={{ db_password }} role_attr_flags=CREATEDB
+  postgresql_user: db={{db_name}} name={{db_user}} password={{db_password}} priv=ALL role_attr_flags=CREATEDB
 
 - name: Setup postgres to listen on other interfaces
   lineinfile: dest=/etc/postgresql/9.3/main/postgresql.conf line="listen_addresses='*'"

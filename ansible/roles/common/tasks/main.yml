@@ -8,5 +8,13 @@
 - name: Install automatic security updates
   command: /usr/bin/unattended-upgrade
 
-- name: Install htop
-  apt: pkg=htop
+- name: Install base system packages
+  apt: name={{item}} state=installed
+  with_items:
+    - build-essential
+    - python-setuptools
+    - python-pip
+    - python-apt
+    - python-dev
+    - python-pycurl
+    - python-software-properties

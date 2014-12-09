@@ -1,27 +1,23 @@
 ---
-- name: Create directory for code
-  file: dest={{ project_path }} mode=777 owner={{username}} group={{groupname}} recurse=yes state=directory
+- name: create directory for code
+  file: dest={{project_path}} mode=0777 owner={{username}} group={{groupname}} recurse=yes state=directory
 
-- apt_repository: repo='ppa:fkrull/deadsnakes'
-- apt: name=python2.7 state=present update_cache=yes
-
-- apt: pkg={{ item }}
+- name: install required base packages
+  apt: pkg={{item}}
   with_items:
-    - python-pip
-    - python-dev
-    - build-essential
     - libpq-dev
-    - postgresql-client
-    - python-psycopg2
-    - python-virtualenv
     - python-django
+    - postgresql-client
+    - python-virtualenv
 
-- pip: name=pip extra_args='--upgrade'
-- pip: requirements={{ requirements_path }} virtualenv={{ python_path }}
+- name: install python requirements
+  sudo_user: "{{username}}"
+  pip: requirements={{requirements_path}} virtualenv={{python_path}}
 
 - name: Set up the application
   django_manage: app_path={{ project_path }} command=setup virtualenv={{ python_path }}
   environment: env_vars
+
   # todo: set up django application
   # todo: django setup command (pip install, migration, starting data)
 
