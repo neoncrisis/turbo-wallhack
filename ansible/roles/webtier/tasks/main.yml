@@ -11,7 +11,7 @@
     - python-virtualenv
 
 - name: install python requirements
-  sudo_user: "{{username}}"
+  sudo: no
   pip: requirements={{requirements_path}} virtualenv={{python_path}}
 
 - name: Set up the application
