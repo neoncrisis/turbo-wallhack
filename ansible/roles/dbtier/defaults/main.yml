@@ -1,2 +1,5 @@
+locale: en_US.UTF-8
+db_user: django
+db_host: localhost
 db_name: electric_boogaloo
-db_password: verysecretpassword
+db_password: YsPIj03h7hjK14aufQJZpCpyed3mwu
