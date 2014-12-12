@@ -18,6 +18,7 @@
 
 - pip: name=pip extra_args='--upgrade'
 - pip: requirements={{ requirements_path }} virtualenv={{ python_path }}
+  sudo: no
 
 - name: Set up the application
   django_manage: app_path={{ project_path }} command=setup virtualenv={{ python_path }}
