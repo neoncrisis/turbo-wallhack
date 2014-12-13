@@ -1,0 +1,7 @@
+{# Automatically export all of our environment variables #}
+{% for var, value in env_vars.items() %}
+export {{var}}="{{value}}"
+{% endfor %}
+
+{# Automatically activate the virtual environment #}
+source {{python_path}}/bin/activate

@@ -2,6 +2,15 @@
 - name: create directory for code
   file: dest={{project_path}} mode=0777 owner={{username}} group={{groupname}} recurse=yes state=directory
 
+- name: .profile customizations
+  sudo_user: "{{username}}"
+  template: src="profile-custom" dest="{{user_home}}/.profile-custom"
+              mode=0644 owner={{username}} group={{username}}
+
+- name: source .profile-custom
+  sudo_user: "{{username}}"
+  lineinfile: line=". ~/.profile-custom" dest="{{user_home}}/.profile"
+
 - name: install required base packages
   apt: pkg={{item}}
   with_items:
