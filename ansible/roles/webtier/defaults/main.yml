@@ -1,6 +1,7 @@
 username: www-data
 groupname: www-data
 project_name: electric_boogaloo
+django_secret_key: '5wv)l41rikaa3650r9jozn=yvr+c=(m39n+jr0g48l8l+27y5+'
 
 user_home: /home/{{ username }}
 code_dir: /code
@@ -11,4 +12,7 @@ project_path: "{{ code_dir }}/{{ project_name }}"
 env_vars:
   DJANGO_SETTINGS_MODULE: "{{ django_settings_module }}"
   SECRET_KEY: "{{ django_secret_key }}"
-  PATH: "{{ python_path }}/bin:{{ www_home }}/node_modules/.bin:{{ ansible_env.PATH }}"
+  PATH: "{{ python_path }}/bin:{{ ansible_env.PATH }}"
+  DATABASE_HOST: "{{db_host|default('')}}"
+  DATABASE_PASSWORD: "{{db_password|default('')}}"
+  PYTHONPATH: "$PYTHONPATH:{{ project_path }}"
